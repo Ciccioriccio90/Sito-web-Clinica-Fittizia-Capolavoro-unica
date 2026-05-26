@@ -10,9 +10,9 @@ app.config['SECRET_KEY'] = 'chiave_molto_segreta'
 
 def db_connection():
     connection = pymysql.connect(
-        host="192.168.51.245",
-        user="marmarasco07",
-        database="marmarasco07",
+        host="127.0.0.1",
+        user="user",
+        database="dbtest",
 
         cursorclass=pymysql.cursors.DictCursor
     )
