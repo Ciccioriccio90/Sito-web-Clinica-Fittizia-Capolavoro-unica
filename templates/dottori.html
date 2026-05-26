@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block main %} 
+<h2>I nostri Dottori</h2>
+  {% for d in dottori %}
+  <div class="dottore">
+    <img src="{{ url_for('static', filename='img/' + d.img) }}" alt="">
+    <div>
+      <p><strong>Nome:</strong> {{ d.nome }}</p>
+      <p><strong>Specializzazione:</strong> {{ d.specializzazione }}</p>
+      <p><strong>Codice:</strong> {{ d.codice }}</p>
+      
+      {% if session.get('ruolo') != 'dottore' %}
+        <a href="{{ url_for('appuntamenti', codice=d.codice, tipo = 'dottore') }}" class="btn">Visite</a>
+      {% endif %}
+      
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

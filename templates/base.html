@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinica Giorgi – Centro Medico d’Eccellenza</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+
+  <header id="top">
+    <h1>Clinica Giorgi</h1>
+  
+    <nav class="hamburger-menu">
+      <input type="checkbox" id="menu-toggle">
+  
+      <label for="menu-toggle" class="hamburger-icon">☰</label>
+  
+      <div class="side-menu">
+        <label for="menu-toggle" class="close-btn">✖</label>
+        <a href="{{url_for('home')}}">Home</a>
+        <a href="{{url_for('dottori')}}">Dottori</a>
+
+        {% if session.get('username') %}
+            {# Area Pazienti: visibile solo a dottori e admin #}
+            {% if session.get('ruolo') == 'dottore' or session.get('ruolo') == 'admin' %}
+                <a href="{{url_for('pazienti')}}">Area Pazienti</a>
+            {% endif %}
+            
+            {# Inserisci Appuntamento: visibile solo ai dottori #}
+            {% if session.get('ruolo') == 'dottore' %}
+                <a href="{{url_for('creappuntamenti')}}">Inserisci Appuntamento</a>
+            {% endif %}
+              
+            {# Gestione o visualizzazione appuntamenti in base al ruolo #}
+            {% if session.get('ruolo') == 'admin' %}
+                <a href="{{url_for('appuntamenti')}}">Gestione Appuntamenti</a>
+            {% else %}
+                <a href="{{url_for('appuntamenti')}}">I miei Appuntamenti</a>
+            {% endif %}
+            
+            <hr style="width:80%; border:0.5px solid #bfa46f;">
+            <a href="{{url_for('logout')}}" style="color: #ff6b6b;">Logout</a>
+            
+        {% else %}
+            <a href="{{url_for('registrazione')}}">Registrazione</a>
+            <a href="{{url_for('login')}}">Login</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% block main %} {% endblock %}
+  </main>
+
+  <footer id="footer">
+    <p><strong>Clinica Giorgi</strong></p>
+    <p>Via Roma 123, 50123 Firenze (FI) · Tel: <a href="tel:+390555551234">+39 055 555 1234</a></p>
+    <p>Email: <a href="mailto:info@clinicagiorgi.it">info@clinicagiorgi.it</a></p>
+    <p>Orari di apertura: Lun - Ven 08:00–19:00 · Sab 08:00–13:00</p>
+    <p>© 2026 Clinica Giorgi – Tutti i diritti riservati</p>
+  </footer>
+
+</body>
+</html>

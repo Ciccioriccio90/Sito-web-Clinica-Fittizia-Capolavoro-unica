@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block main %}
+<section class="intro hero">
+    <h2>Accesso Portale Sanitario</h2>
+    <p>Benternato nella Clinica Giorgi. Seleziona il tuo ruolo e inserisci le credenziali.</p>
+</section>
+
+<div class="form-container" style="max-width: 450px;">
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for message in messages %}
+            <div class="alert alert-warning" style="background-color: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #ffeeba; text-align: center;">
+                {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('login') }}" method="POST">
+        
+        <div class="form-group">
+            <label for="ruolo">Accedi come:</label>
+            <select name="ruolo" id="ruolo" required>
+                <option value="paziente">Paziente</option>
+                <option value="dottore">Dottore</option>
+                <option value="admin">Amministratore</option> 
+            </select>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Inserisci il tuo username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top: 20px;">Accedi</button>
+        
+        <div style="margin-top: 25px; text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
+            <p style="font-size: 0.9rem; color: #555;">Non hai ancora un account?</p>
+            <a href="{{ url_for('registrazione') }}" style="color: #bfa46f; font-weight: 600; text-decoration: underline;">Registrati ora</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

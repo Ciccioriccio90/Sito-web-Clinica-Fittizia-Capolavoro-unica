@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block main %} 
+<h2>Appuntamenti</h2>
+<table>
+ <thead>
+  <tr>
+   <th>Codice Dottore</th>
+   <th>Codice Paziente</th>
+   <th>Data</th>
+   <th>Ora</th>
+  </tr>
+ </thead>
+ <tbody>
+  {% for v in visite %}
+  <tr>
+   <td>{{ v.codice_dottore }}</td>
+   <td>{{ v.codice_fiscale }}</td>
+   <td>{{ v.data }}</td>
+   <td>{{ v.ora }}</td>
+  </tr>
+  {% endfor %}
+ </tbody>
+</table>
+{% endblock %}

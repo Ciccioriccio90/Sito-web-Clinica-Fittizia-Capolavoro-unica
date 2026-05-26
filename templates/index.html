@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block main %} 
+<section class="intro hero">
+  <h2>Benvenuti alla Clinica Giorgi</h2>
+  <p>
+    La <strong>Clinica Giorgi</strong> è un centro medico moderno e all’avanguardia, dedicato alla salute e al benessere dei nostri pazienti. 
+    Offriamo servizi di alta qualità in molteplici specializzazioni, garantendo un approccio personalizzato e centrato sul paziente.
+  </p>
+  <p>
+    La nostra struttura integra tecnologie innovative, come la <em>robotica avanzata</em> per interventi chirurgici di precisione, sistemi di monitoraggio predittivo in Terapia Intensiva e percorsi di riabilitazione assistita da dispositivi robotici. 
+    Ogni trattamento è progettato per assicurare sicurezza, efficacia e comfort.
+  </p>
+  <p>
+    Il nostro team di professionisti qualificati lavora con passione e competenza, unendo esperienza clinica e innovazione scientifica. 
+    Dalla prevenzione alla cura delle patologie più complesse, ci impegniamo a offrire un’assistenza sanitaria completa, umana e tecnologicamente avanzata.
+  </p>
+  <p>
+    Scopri le nostre specializzazioni, incontra i medici, gestisci i tuoi appuntamenti e fai parte di un percorso di salute innovativo e sicuro.
+    <br><br>
+  </p>
+  <img src="{{url_for('static',filename='img/Copilot_20251111_121339.png')}}" alt="Stanza moderna della Clinica Giorgi" width="400" class="imageborder">
+</section>
+
+<section class="riquadri">
+  
+  <div class="card">
+    <h3>Dottori</h3>
+    <p>Consulta il nostro team di medici qualificati.</p>
+    <img src="{{url_for('static',filename='img/Dottore meu.png')}}" alt="Medico" width="200" class="imageborder">
+    <a href="{{url_for('dottori')}}" class="btn">Scopri</a>
+  </div>
+
+  {% if session.get('ruolo') == 'dottore' or session.get('ruolo') == 'admin' %}
+  <div class="card">
+    <h3>Pazienti</h3>
+    <p>Gestisci le informazioni dei nostri pazienti.</p>
+    <img src="{{url_for('static',filename='img/paziente.png')}}" alt="Pazienti" width="200" class="imageborder">
+    <a href="{{url_for('pazienti')}}" class="btn">Accedi</a>
+  </div>
+  {% endif %}
+
+  {% if session.get('username') %}
+  <div class="card">
+    <h3>Appuntamenti</h3>
+    <p>Visualizza i tuoi impegni programmati.</p>
+    <img src="{{url_for('static',filename='img/segretaria.png')}}" alt="Appuntamenti" width="200" class="imageborder">
+    <a href="{{url_for('appuntamenti')}}" class="btn">Visualizza</a>
+  </div>
+  {% endif %}
+
+</section>
+{% endblock %}

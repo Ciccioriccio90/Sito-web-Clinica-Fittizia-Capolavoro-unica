@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block main %} 
+<h2>Elenco Pazienti</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Codice Fiscale</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Data di Nascita</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pazienti %}
+    <tr>
+      <td>{{ p.cf }}</td>
+      <td>{{ p.nome }}</td>
+      <td>{{ p.cognome }}</td>
+      <td>{{ p.nascita }}</td>
+      <td>
+        <a class="btn" href="{{ url_for('appuntamenti', codice=p.cf, tipo = 'paziente') }}">
+          Visite
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
